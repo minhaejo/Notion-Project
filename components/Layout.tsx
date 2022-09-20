@@ -4,6 +4,7 @@ import Header from "./headerCompo/Header";
 
 interface props {
   children: React.ReactNode;
+  className?: string;
 }
 
 const Layout: FC<props> = ({ children }) => {
