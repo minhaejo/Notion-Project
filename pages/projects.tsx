@@ -1,6 +1,9 @@
 import Head from "next/head";
 import React, { FC } from "react";
 import { TOKEN, DATABASE_ID } from "../config";
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { GetStaticPropsContext } from "next";
 
 import Layout from "../components/Layout";
 import { NotionDataBase, Result } from "../model/projects";
@@ -10,7 +13,8 @@ interface Props {
   projects: NotionDataBase;
 }
 
-const projects: FC<Props> = ({ projects }) => {
+const Projects: FC<Props> = ({ projects }) => {
+  const { t } = useTranslation("about");
   console.log(projects);
   return (
     <>
@@ -22,7 +26,7 @@ const projects: FC<Props> = ({ projects }) => {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <h1 className="text-4xl font-bold sm:text-6xl">
-            총 프로젝트 :
+            {/* {t("h1")} */}총 프로젝트 :
             <span className="pl-4 text-blue-400">
               {projects.results.length}
             </span>
@@ -38,9 +42,9 @@ const projects: FC<Props> = ({ projects }) => {
   );
 };
 
-export default projects;
+export default Projects;
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }: GetStaticPropsContext) {
   const options = {
     method: "POST",
     headers: {
@@ -75,7 +79,10 @@ export async function getStaticProps() {
   // console.log(notionTitlePlainTextArray);
 
   return {
-    props: { projects }, // will be passed to the page component as props
+    props: {
+      projects,
+      ...(await serverSideTranslations(locale as string, ["about"])),
+    }, // will be passed to the page component as props
   };
 }
 
@@ -84,3 +91,48 @@ export async function getStaticProps() {
 //   (aProject: Result) => aProject.properties.Name.title[0].plain_text
 // );
 // console.log(projectProperties);
+
+// import { Router, useRouter } from "next/router";
+// import React from "react";
+// import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+// import { useTranslation } from "next-i18next";
+// import Link from "next/link";
+// import { GetStaticPropsContext } from "next";
+
+// export const getStaticProps = async ({ locale }: GetStaticPropsContext) => ({
+//   props: {
+//     ...(await serverSideTranslations(locale as string, ["about"])),
+//     //로케일을 들고 즉 "ko","en"인것중에서 about json 을 들고오는게 서버사이드 트렌스레이트
+//     //json 파일 자체가 백엔드 쪽 서버영역이기 때문에 가져오는대 서버코드가 필요한거같음.
+//     //serverSideTranslations,locale,과 데이터를 들고올 페이지를 작성하는거임
+//   },
+// });
+// //locale활성 로케일을 포함합니다(활성화된 경우) 컨텍스트 매개변수.
+// const AboutPage = () => {
+//   const router = useRouter();
+//   //useRouter 객체안에는 여러 데이터들중 locale이라는 데이터 값이있음.
+//   const { t } = useTranslation("about");
+//   //useTranslation을 통해서 about으로 시작하는 json 데이터를 가지고옴
+//   return (
+//     <div>
+//       <h1>{t("h1")}</h1>
+//       <ul>
+//         <li>
+//           {t("currentUrl")} : http://localhost:3000
+//           {router.locale !== "ko" && "/" + router.locale}
+//           {router.pathname}
+//         </li>
+//         <li>locale:{router.locale}</li>
+//         <li>pathname: {router.pathname}</li>
+//       </ul>
+//       <div>
+//         <Link href="/about" locale="en">
+//           <button style={{ width: 70, height: 70 }}>{t("English")}</button>
+//         </Link>
+//         <Link href="/about" locale="ko">
+//           <button style={{ width: 70, height: 70 }}>{t("Korean")}</button>
+//         </Link>
+//       </div>
+//     </div>
+//   );
+// };
