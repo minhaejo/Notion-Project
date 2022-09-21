@@ -1,8 +1,13 @@
+import { useTranslation } from "next-i18next";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import DarkModeToggleButton from "../dark-mode-toggle/Dark-mode-toggle-button";
 
 const Header = () => {
+  const router = useRouter();
+  const locale = router.locale;
+  const { t } = useTranslation(["header"]);
   return (
     <div>
       <header className="text-gray-600 body-font">
@@ -21,22 +26,31 @@ const Header = () => {
               >
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
               </svg>
-              <span className="ml-3 text-xl">미마모 코딩</span>
+              <h1 className="ml-3 text-xl">{t("header:logoText")}</h1>
             </a>
           </Link>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <Link href="/">
-              <a className="mr-5 hover:text-gray-900">Home</a>
+              <a className="mr-5 hover:text-gray-900">{t("header:home")}</a>
             </Link>
+
+            {/* "home": "홈",
+  "project": "프로젝트",
+  "contact me": "연락하기" */}
             <Link href="/projects">
-              <a className="mr-5 hover:text-gray-900">Project</a>
+              <a className="mr-5 hover:text-gray-900">{t("header:project")}</a>
+            </Link>
+            <Link href="/" locale={locale === "ko" ? "en" : "ko"}>
+              <a className="mr-5 hover:text-gray-900">
+                {t("header:changeTheLanguage")}
+              </a>
             </Link>
 
             <a
               href="https://open.kakao.com/o/sSGWh3Be"
               className="mr-5 hover:text-gray-900"
             >
-              Contact me
+              {t("header:contactMe")}
             </a>
           </nav>
           <DarkModeToggleButton />

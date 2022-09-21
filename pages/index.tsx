@@ -1,9 +1,10 @@
-import type { NextPage } from "next";
+import type { GetStaticPropsContext, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Hero from "../components/home/Hero";
 import Layout from "../components/Layout";
 import Animation from "../components/home/lotti/Animation";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Home: NextPage = () => {
   return (
@@ -23,3 +24,9 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getStaticProps = async ({ locale }: GetStaticPropsContext) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string, ["header", "contants"])),
+  },
+});

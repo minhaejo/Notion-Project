@@ -14,10 +14,16 @@ interface Props {
 }
 
 const Projects: FC<Props> = ({ projects }) => {
-  const { t } = useTranslation("about");
+  const { t } = useTranslation("project");
   console.log(projects);
   return (
     <>
+      {/* 햄버거 바 하나만들고 누르면 슉 내려오게 그래서 ko en 을 고를수있게  */}
+      {/* 고르면 그 위치로 (즉 locale로 ) 이동할수있어야함 a or Link  */}
+      {/* 그 위치로 가면  */}
+      {/* <Link href="projects" locale="en">
+        <button></button>
+      </Link> */}
       <Layout>
         <div className="flex flex-col items-center justify-content min-h-screen px-5 py-24 mb-10 px-6">
           <Head>
@@ -26,7 +32,7 @@ const Projects: FC<Props> = ({ projects }) => {
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <h1 className="text-4xl font-bold sm:text-6xl">
-            {/* {t("h1")} */}총 프로젝트 :
+            {t("counter")} :
             <span className="pl-4 text-blue-400">
               {projects.results.length}
             </span>
@@ -81,7 +87,10 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   return {
     props: {
       projects,
-      ...(await serverSideTranslations(locale as string, ["about"])),
+      ...(await serverSideTranslations(locale as string, [
+        "project",
+        "header",
+      ])),
     }, // will be passed to the page component as props
   };
 }
