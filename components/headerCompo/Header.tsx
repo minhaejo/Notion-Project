@@ -7,7 +7,7 @@ import DarkModeToggleButton from "../dark-mode-toggle/Dark-mode-toggle-button";
 const Header = () => {
   const router = useRouter();
   const locale = router.locale;
-  const { t } = useTranslation(["header"]);
+  const { t } = useTranslation(["common"]);
   return (
     <div>
       <header className="text-gray-600 body-font">
@@ -26,23 +26,28 @@ const Header = () => {
               >
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
               </svg>
-              <h1 className="ml-3 text-xl">{t("header:logoText")}</h1>
+              <h1 className="ml-3 text-xl">{t("common:logoText")}</h1>
             </a>
           </Link>
           <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
             <Link href="/">
-              <a className="mr-5 hover:text-gray-900">{t("header:home")}</a>
+              <a className="mr-5 hover:text-gray-900">{t("common:home")}</a>
             </Link>
 
             {/* "home": "홈",
   "project": "프로젝트",
   "contact me": "연락하기" */}
             <Link href="/projects">
-              <a className="mr-5 hover:text-gray-900">{t("header:project")}</a>
+              <a className="mr-5 hover:text-gray-900">{t("common:project")}</a>
             </Link>
-            <Link href="/" locale={locale === "ko" ? "en" : "ko"}>
+            <Link href="/blog">
               <a className="mr-5 hover:text-gray-900">
-                {t("header:changeTheLanguage")}
+                {t("common:viewMyBlog")}
+              </a>
+            </Link>
+            <Link href="" locale={locale === "ko" ? "en" : "ko"}>
+              <a className="mr-5 hover:text-gray-900">
+                {t("common:changeTheLanguage")}
               </a>
             </Link>
 
@@ -50,7 +55,7 @@ const Header = () => {
               href="https://open.kakao.com/o/sSGWh3Be"
               className="mr-5 hover:text-gray-900"
             >
-              {t("header:contactMe")}
+              {t("common:contactMe")}
             </a>
           </nav>
           <DarkModeToggleButton />

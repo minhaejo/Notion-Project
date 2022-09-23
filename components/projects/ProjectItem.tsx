@@ -5,6 +5,7 @@ import Image from "next/image";
 interface Props {
   aProjectData: Result;
 }
+//  aProjectData.properties.Name.title[0].plain_text;
 const ProjectItem: FC<Props> = ({ aProjectData }) => {
   const projectTitle = aProjectData.properties.Name.title[0].plain_text;
   const githubLink = aProjectData.properties.Github.rich_text[0].text.link.url;
@@ -14,6 +15,8 @@ const ProjectItem: FC<Props> = ({ aProjectData }) => {
   const tags = aProjectData.properties.Tags.multi_select;
   const start = aProjectData.properties.workperiod.date.start;
   const end = aProjectData.properties.workperiod.date.end;
+
+  // console.log(projectTitle);
 
   const calculatedPeriod = (start: string, end: string) => {
     const startDateStringArray = start.split("-");
@@ -30,13 +33,8 @@ const ProjectItem: FC<Props> = ({ aProjectData }) => {
       Number(endDateStringArray[2])
     );
 
-    console.log(`startDate: ${startDate}`);
-    console.log(`endDate: ${endDate}`);
-
     const diffInMs = Math.abs(Number(endDate) - Number(startDate));
     const result = diffInMs / (1000 * 60 * 60 * 24);
-
-    console.log(`기간 : ${result}`);
     return result;
   };
 

@@ -14,16 +14,16 @@ const Hero = () => {
   //   "technicalBlogs": "기술 블로그에 겪었던 이슈,혹은 몰랐던 개념들을 기록합니다.",
   //   "anewStudying": "새롭게 공부하는 것에대한 두려움이 없습니다."
   // }
-
+  //
   return (
     <>
-      <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-        <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900 ">
+      <div className="lg:flex-grow md:w-1/2 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+        <h1 className="title-font sm:text-4xl text-xl mb-3 font-medium text-gray-900 ">
           {t("contants:introduce")}
           <br className="hidden lg:inline-block" />
-          {t("contants:subIntroduce")}
+          <span className="mt-[20px]">{t("contants:subIntroduce")}</span>
         </h1>
-        <p className="mb-8 leading-relaxed">
+        <p className="mb-8 leading-relaxed text-[15px]">
           {t("contants:differentPassion")}
           <br />
           {t("contants:reusableCodeAimfor")}

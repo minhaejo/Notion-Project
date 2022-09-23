@@ -76,9 +76,9 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
   );
   const projects = await res.json();
   console.log(projects);
-  const projectNames = projects.results.map(
-    (aProject: Result) => aProject.properties.Name.title[0].plain_text
-  );
+  // const projectNames = projects.results.map(
+  //   (aProject: Result) => aProject.properties.Name.title[0].plain_text
+  // );
 
   // const notionTitlePlainText = projectProperties.join();
   // const notionTitlePlainTextArray = notionTitlePlainText.split("  ,", 4);
@@ -89,7 +89,7 @@ export async function getStaticProps({ locale }: GetStaticPropsContext) {
       projects,
       ...(await serverSideTranslations(locale as string, [
         "project",
-        "header",
+        "common",
       ])),
     }, // will be passed to the page component as props
   };
