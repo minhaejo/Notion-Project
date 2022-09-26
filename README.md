@@ -9,7 +9,7 @@ npm run build
  -컴포넌트의 구조는 재사용성을 높이기 위해 Layout을 잡고 반복적으로 페이지마다 사용해두었습니다.
  -i18n국제화를 구현하면서 헤더와 푸터의 내용은 common.json안으로 넣어 보다 유지보수성을 높였습니다.
  
- -##어려움을 겪었던 순간 
+ ##어려움을 겪었던 순간 
  -처음 국제화를 접했을 때 페이지의 단위에서 getStaticProps로 locale을 감지시켜 동작을 시켜야했는데 이부분의 개념이 명확하지 않았기에 정상적으로 동작하지 않았습니다.
  -공식문서와 여러 블로그를 참고하면서 다른 사람들이 작성한 코드 , 파일구조를 분석하고 테스트 파일을 만들어 따로 한 번 세팅하고 코드를 작성했습니다.
  -또한 useTranslation , serverSideTranslations HOOK을 공부하면서 useTranslation이 작동하기 위해서는 PAGES에서  serverSideTranslations를 통해 OPTION을 전달받아야 한다는것을 공부했습니다.
